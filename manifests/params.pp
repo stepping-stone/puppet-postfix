@@ -55,6 +55,30 @@ class postfix::params {
       $sendmail_path = '/usr/sbin/sendmail.postfix'
       $postmap = '/usr/sbin/postmap'
     }
+    'Gentoo': {
+      $command_directory = '/usr/sbin'
+      $config_directory = '/etc/postfix'
+      $daemon_directory = '/usr/libexec/postfix'
+      $data_directory = '/var/lib/postfix'
+      $manpage_directory = undef
+      $readme_directory = undef
+      $sample_directory = undef
+      $service_restart = '/usr/sbin/service postfix reload'
+      $dovecot_directory = '/usr/lib/dovecot'
+      $postfix_package = 'postfix'
+      $postfix_mysql_package = 'postfix-mysql'
+      $postgrey_package = 'postgrey'
+      $spamassassin_package = 'spamassassin'
+      $spampd_package = 'spampd'
+      $spampd_config = '/etc/default/spampd'
+      $spampd_template = 'postfix/default-spampd.erb'
+      $root_group = 'root'
+      $setgid_group = 'postdrop'
+      $mailq_path = '/usr/bin/mailq'
+      $newaliases_path = '/usr/bin/newaliases'
+      $sendmail_path = '/usr/sbin/sendmail'
+      $postmap = '/usr/sbin/postmap' 
+    }
     'FreeBSD': {
       $command_directory = '/usr/local/sbin'
       $config_directory = '/usr/local/etc/postfix'
