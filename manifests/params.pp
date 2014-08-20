@@ -56,13 +56,14 @@ class postfix::params {
       $postmap = '/usr/sbin/postmap'
     }
     'Gentoo': {
+      $postfix_version = '2.10.3'
       $command_directory = '/usr/sbin'
       $config_directory = '/etc/postfix'
       $daemon_directory = '/usr/libexec/postfix'
       $data_directory = '/var/lib/postfix'
-      $manpage_directory = undef
-      $readme_directory = undef
-      $sample_directory = undef
+      $manpage_directory = "/usr/share/doc/postfix-${postfix_version}"
+      $readme_directory = "/usr/share/doc/postfix-${postfix_version}"
+      $sample_directory = "/usr/share/doc/postfix-${postfix_version}"
       $service_restart = '/usr/sbin/service postfix reload'
       $dovecot_directory = '/usr/lib/dovecot'
       $postfix_package = 'postfix'
