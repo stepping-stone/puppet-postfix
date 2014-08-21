@@ -103,8 +103,8 @@ class postfix::server (
   $smtps_smtpd_client_restrictions = 'permit_sasl_authenticated',
   $master_services = [],
   # Other files
-  $header_checks = [],
-  $body_checks = [],
+  $header_checks = undef,
+  $body_checks = undef,
   # Postscreen - available in Postfix 2.8 and later
   $postscreen                  = false,
   $postscreen_access_list      = ['permit_mynetworks'],
