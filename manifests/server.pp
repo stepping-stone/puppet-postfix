@@ -23,6 +23,7 @@ class postfix::server (
   $unknown_local_recipient_reject_code = '550',
   $mynetworks_style = false,
   $mynetworks = false,
+  $relay = true,
   $relay_domains = false,
   $relayhost = false,
   $relay_recipient_maps = false,
@@ -233,17 +234,21 @@ class postfix::server (
   }
 
   # Regex header_checks
-  postfix::file { 'header_checks':
-    content    => template('postfix/header_checks.erb'),
-    group      => $root_group,
-    postfixdir => $config_directory,
+  if $header_checks != undef {
+    postfix::file { 'header_checks':
+      content    => template('postfix/header_checks.erb'),
+      group      => $root_group,
+      postfixdir => $config_directory,
+    }
   }
 
   # Regex body_checks
-  postfix::file { 'body_checks':
-    content    => template('postfix/body_checks.erb'),
-    group      => $root_group,
-    postfixdir => $config_directory,
+  if $body_checks != undef {
+    postfix::file { 'body_checks':
+      content    => template('postfix/body_checks.erb'),
+      group      => $root_group,
+      postfixdir => $config_directory,
+    }
   }
 
 }
