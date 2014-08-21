@@ -10,6 +10,7 @@
 # ==========================================================================
 <% unless @postscreen -%>
 smtp      inet  n       -       n       -       -       smtpd
+smtpd     pass  -       -       n       -       -       smtpd
 <% else -%>
 smtp      inet  n       -       n       -       1       postscreen
 tlsproxy  unix  -       -       n       -       0       tlsproxy
@@ -37,9 +38,9 @@ smtps     inet  n       -       n       -       -       smtpd
 <% end -%>
 <% end -%>
 #628      inet  n       -       n       -       -       qmqpd
-pickup    fifo  n       -       n       60      1       pickup
+pickup    unix  n       -       n       60      1       pickup
 cleanup   unix  n       -       n       -       0       cleanup
-qmgr      fifo  n       -       n       300     1       qmgr
+qmgr      unix  n       -       n       300     1       qmgr
 #qmgr     fifo  n       -       n       300     1       oqmgr
 tlsmgr    unix  -       -       n       1000?   1       tlsmgr
 rewrite   unix  -       -       n       -       -       trivial-rewrite
@@ -51,10 +52,12 @@ flush     unix  n       -       n       1000?   0       flush
 proxymap  unix  -       -       n       -       -       proxymap
 proxywrite unix -       -       n       -       1       proxymap
 smtp      unix  -       -       n       -       -       smtp
+<% if @relay -%>
 # When relaying mail as backup MX, disable fallback_relay to avoid MX loops
 relay     unix  -       -       n       -       -       smtp
 	-o smtp_fallback_relay=
 #       -o smtp_helo_timeout=5 -o smtp_connect_timeout=5
+<% end -%>
 showq     unix  n       -       n       -       -       showq
 error     unix  -       -       n       -       -       error
 retry     unix  -       -       n       -       -       error
