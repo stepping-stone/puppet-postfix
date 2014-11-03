@@ -47,14 +47,21 @@ define postfix::dbfile (
 
   } else {
 
-    exec { "${postmap} ${title}":
+    exec { 'updateDbFile':
+      command     => "${postmap} ${title}",
       cwd         => $postfixdir,
       subscribe   => File["${postfixdir}/${title}"],
       refreshonly => true,
       # No need to notify the service, since it detects changed files
     }
 
+    exec { 'createDbFile':
+      command => "${postmap} ${title}",
+      cwd     => $postfixdir,
+      creates => "${postfixdir}/${title}.db",
+      require => Exec['updateDbFile'],
+    }
+
   }
 
 }
-
