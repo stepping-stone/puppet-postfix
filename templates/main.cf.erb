@@ -425,7 +425,9 @@ relocated_maps = <%= @relocated_maps %>
 # "postfix reload" to eliminate the delay.
 #
 #alias_maps = dbm:/etc/aliases
+<% if @alias_maps -%>
 alias_maps = <%= @alias_maps %>
+<% end -%>
 #alias_maps = hash:/etc/aliases, nis:mail.aliases
 #alias_maps = netinfo:/aliases
 
@@ -436,7 +438,9 @@ alias_maps = <%= @alias_maps %>
 #
 #alias_database = dbm:/etc/aliases
 #alias_database = dbm:/etc/mail/aliases
+<% if @alias_database -%>
 alias_database = <%= @alias_database %>
+<% end -%>
 #alias_database = hash:/etc/aliases, hash:/opt/majordomo/aliases
 
 # ADDRESS EXTENSIONS (e.g., user+foo)
